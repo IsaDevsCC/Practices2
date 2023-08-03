@@ -14,19 +14,19 @@ class ListViewModel(
     private val listUseCase: DownloadListUseCase
 ) : ViewModel() {
 
-    /*
-    private val _data = MutableStateFlow <UIState>(UIState.Idle)
-    val data : MutableStateFlow <UIState> get()  = _data*/
+
+    /*private val _data = MutableStateFlow <UIState>(UIState.Idle)
+    val data : StateFlow <UIState> get()  = _data*/
     private val _data = MutableStateFlow <List<Model>>(listOf())
     val data : StateFlow <List<Model>> get()  = _data
 
     fun downloadList() {
-        //viewModelScope.launch££ {
-           // _data.value = UIState.ListData(listUseCase.downloadData())
+        viewModelScope.launch(Dispatchers.IO) {
+            //_data.value = UIState.ListData(listUseCase.downloadData())
 
-           _data.value = listUseCase.downloadData()
+            _data.value = listUseCase.downloadData()
             println(data.toString())
-        //}
+        }
     }
 
 

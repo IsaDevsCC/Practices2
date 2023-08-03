@@ -44,4 +44,9 @@ class ListFragment : Fragment() {
         adapter = ListAdapter(viewModel.data.value)
     }
 
+    /*private suspend fun setObservers(){
+        viewModel.data.collect {
+            it
+        }
+    }*/
 }
