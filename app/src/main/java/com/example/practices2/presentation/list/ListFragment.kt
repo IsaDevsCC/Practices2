@@ -1,6 +1,7 @@
 package com.example.practices2.presentation.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Display
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,22 +35,26 @@ class ListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //viewModel.downloadList()
+        viewModel.data.observe(viewLifecycleOwner) {
+            getStart(it)
+        }
+        //getStart()
+
         viewModel.downloadList()
-        getStart()
     }
 
-    private fun getStart() = binding.rvList.run {
+    private fun getStart(values : List<Model>) = binding.rvList.run {
 
-        //viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            lifecycleScope.launch(Dispatchers.IO){
-                viewModel.data.onEach {
-                    it
-                }.catch { "Error" }
-                    .collect()
-            }
-        //}
-
-        adapter = ListAdapter(viewModel.data.value)
+        /*viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                Log.i("VALUESVIEWMODEL", viewModel.data.value.toString())
+                viewModel.data.collect()
+            Log.i("VALUESVIEWMODEL", viewModel.data.value.toString())
+            }*/
+        Log.i("VALUESVIEWMODEL", values.toString())
+        /// livedata
+        //adapter = ListAdapter(viewModel.data.value)
+        adapter = ListAdapter(values)
     }
 
     /*private suspend fun setObservers(){

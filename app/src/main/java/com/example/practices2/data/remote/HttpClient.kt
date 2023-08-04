@@ -1,5 +1,6 @@
 package com.example.practices2.data.remote
 
+import com.example.practices2.data.remote.dto.Data
 import com.example.practices2.data.remote.dto.ModelDTO
 import com.example.practices2.domain.model.Model
 import retrofit2.http.GET
@@ -11,5 +12,6 @@ import retrofit2.http.GET
 interface HttpClient {
 
     @GET("api/personajes?limit=300")
-    suspend fun DownloadList() : List<ModelDTO>
+    //suspend fun DownloadList() : List<ModelDTO>
+    suspend fun downloadList() : Data
 }

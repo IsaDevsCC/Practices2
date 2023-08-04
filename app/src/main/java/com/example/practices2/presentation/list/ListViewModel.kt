@@ -1,6 +1,7 @@
 package com.example.practices2.presentation.list
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practices2.domain.model.Model
@@ -18,15 +19,21 @@ class ListViewModel(
 
     /*private val _data = MutableStateFlow <UIState>(UIState.Idle)
     val data : StateFlow <UIState> get()  = _data*/
-    private val _data = MutableStateFlow <List<Model>>(listOf())
-    val data : StateFlow <List<Model>> get()  = _data
+    //private val _data = MutableStateFlow <List<Model>>(listOf())
+    private val _data = MutableLiveData <List<Model>>(listOf())
+    //val data : StateFlow <List<Model>> get()  = _data
+    val data : MutableLiveData<List<Model>> get()  = _data
 
     fun downloadList() {
-        viewModelScope.launch(Dispatchers.IO) {
+       /* viewModelScope.launch(Dispatchers.IO) {
             //_data.value = UIState.ListData(listUseCase.downloadData())
 
             _data.value = listUseCase.downloadData()
-            Log.i("PREVIEW_DATA", "LISTA : ${_data.value}")
+            Log*/
+
+        // todo, verificar porqué solo funciona con el main???
+        viewModelScope.launch(Dispatchers.Main) {
+            _data.value = listUseCase.downloadData()
         }
     }
 

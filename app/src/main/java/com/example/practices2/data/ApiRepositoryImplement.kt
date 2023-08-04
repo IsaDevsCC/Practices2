@@ -16,10 +16,18 @@ class ApiRepositoryImplement(
 
     override suspend fun getDataList(): List<Model> {
 
-        return if (remoteData.getDataList().isNotEmpty()) {
-            remoteData.getDataList().map { it.toModelView() }
+        val simps = if (remoteData.getDataList().docs.isNotEmpty()){
+            remoteData.getDataList().docs.map { it.toModelView() }
         } else {
             listOf()
         }
+        Log.i("TAG", simps.toString())
+        /*return if (remoteData.getDataList().docs.isNotEmpty()){
+            remoteData.getDataList().docs.map { it.toModelView() }
+        } else {
+            listOf()
+        }*/
+
+        return simps
     }
 }

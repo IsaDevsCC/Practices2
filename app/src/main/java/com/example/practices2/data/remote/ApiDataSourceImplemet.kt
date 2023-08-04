@@ -1,6 +1,7 @@
 package com.example.practices2.data.remote
 
 //import com.example.practices2.data.remote.dto.ModelDTO
+import com.example.practices2.data.remote.dto.Data
 import com.example.practices2.data.remote.dto.ModelDTO
 //import com.example.practices2.data.remote.dto.SimpsonsDTO
 import com.example.practices2.domain.model.Model
@@ -13,6 +14,7 @@ class ApiDataSourceImplement(
     private val api : HttpClient
 ) : ApiDataSource {
 
-    override suspend fun getDataList(): List<ModelDTO> = api.DownloadList()
-    //override suspend fun getDataList(): List<SimpsonsDTO> = api.DownloadList()
+    //override suspend fun getDataList(): List<ModelDTO> = api.DownloadList()
+    override suspend fun getDataList(): Data = api.downloadList()
+
 }
