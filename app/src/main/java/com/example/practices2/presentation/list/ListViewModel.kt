@@ -1,5 +1,6 @@
 package com.example.practices2.presentation.list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practices2.domain.model.Model
@@ -25,7 +26,7 @@ class ListViewModel(
             //_data.value = UIState.ListData(listUseCase.downloadData())
 
             _data.value = listUseCase.downloadData()
-            println(data.toString())
+            Log.i("PREVIEW_DATA", "LISTA : ${_data.value}")
         }
     }
 
