@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment() {
@@ -39,22 +40,30 @@ class ListFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) {
             getStart(it)
         }
+
+
         //getStart()
 
         viewModel.downloadList()
+        //getStart()
     }
 
     private fun getStart(values : List<Model>) = binding.rvList.run {
+    //private fun getStart() = binding.rvList.run {
 
-        /*viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-                Log.i("VALUESVIEWMODEL", viewModel.data.value.toString())
+        /*viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                 viewModel.data.collect()
-            Log.i("VALUESVIEWMODEL", viewModel.data.value.toString())
             }*/
-        Log.i("VALUESVIEWMODEL", values.toString())
+
+            Log.i("VALUESVIEWMODEL", viewModel.data.value.toString())
+            adapter = viewModel.data.value?.let { ListAdapter(it) }
+        }
+
+
+        //Log.i("VALUESVIEWMODEL", values.toString())
         /// livedata
         //adapter = ListAdapter(viewModel.data.value)
-        adapter = ListAdapter(values)
+
     }
 
     /*private suspend fun setObservers(){
@@ -62,4 +71,4 @@ class ListFragment : Fragment() {
             it
         }
     }*/
-}
+//}
