@@ -16,19 +16,21 @@
         >
 
         <ImageView
+            android:layout_margin="10dp"
             android:id="@+id/ivPhoto"
             android:layout_width="150dp"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:src="@drawable/ic_launcher_background" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:text="@string/title"
         android:textColor="#673AB7"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/cvCardView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +46,8 @@
         android:layout_margin="15dp"
         app:layout_constraintStart_toEndOf="@id/cvCardView"
         app:layout_constraintTop_toBottomOf="@id/tvName"
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 

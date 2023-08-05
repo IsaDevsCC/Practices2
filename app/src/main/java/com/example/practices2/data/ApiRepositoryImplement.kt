@@ -1,6 +1,10 @@
 package com.example.practices2.data
 
 import android.util.Log
+import com.example.practices2.data.local.ModelDataSource
+import com.example.practices2.data.mappers.toModel
+import com.example.practices2.data.mappers.toModelDAO
+
 import com.example.practices2.data.mappers.toModelView
 import com.example.practices2.data.remote.ApiDataSource
 import com.example.practices2.domain.model.Model
@@ -11,23 +15,26 @@ import com.example.practices2.domain.model.Model
  * - DESDE EL REPOSITORY SE DEBE DE MANEJAR LA CONVERSIÓN DE DATOS, PARA EMITIRLOS A LA VISTA, Y LAS VALIDACIONES
  */
 class ApiRepositoryImplement(
-    private val remoteData : ApiDataSource
+    private val remoteData : ApiDataSource,
+    private val roomData : ModelDataSource
 ) : ApiRepository {
 
     override suspend fun getDataList(): List<Model> {
 
-        /*val simps = if (remoteData.getDataList().docs.isNotEmpty()){
+        //Log.i("TAG", simps.toString())*/
+        /*return if (remoteData.getDataList().docs.isNotEmpty()){
             remoteData.getDataList().docs.map { it.toModelView() }
         } else {
             listOf()
-        }
-        Log.i("TAG", simps.toString())*/
-        return if (remoteData.getDataList().docs.isNotEmpty()){
-            remoteData.getDataList().docs.map { it.toModelView() }
-        } else {
-            listOf()
-        }
+        }*/
+        Log.i("TAG", roomData.getAll().size.toString())
 
-        //return simps
+        return if (roomData.getAll().isNotEmpty()){
+            roomData.getAll().map { it.toModel()
+            }
+        } else{
+            roomData.insertInto(remoteData.getDataList().docs.map { it.toModelDAO() })
+            remoteData.getDataList().docs.map { it.toModelView() }
+        }
     }
 }

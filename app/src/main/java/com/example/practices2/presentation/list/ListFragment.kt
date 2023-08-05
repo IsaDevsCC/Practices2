@@ -55,7 +55,7 @@ class ListFragment : Fragment() {
                 viewModel.data.collect()
             }*/
 
-            Log.i("VALUESVIEWMODEL", viewModel.data.value.toString())
+            Log.i("VALUESVIEWMODEL", viewModel.data.value?.size.toString())
             adapter = viewModel.data.value?.let { ListAdapter(it) }
         }
 
